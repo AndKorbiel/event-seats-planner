@@ -7,7 +7,10 @@ const initialState = {
 export function mainReducer(state = initialState, action) {
     switch (action.type) {
         case 'TEST_ACTION_TYPE':
-            return state;
+            return {
+                ...state,
+                value: action.payload
+            }
 
         default:
             return state;
