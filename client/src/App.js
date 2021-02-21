@@ -6,24 +6,29 @@ import {
 } from "react-router-dom";
 import { About } from './views/About';
 import HomePage from './views/HomePage';
-import './App.css';
+
+import Container from '@material-ui/core/Container';
+import './styles/App.css';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-              <Link to="/about">About</Link>
-            </li>
-          </ul>
-        </nav>
-        <Switch>
-          <Route exact path="/" component={HomePage}></Route>
-          <Route path="/about" component={About}></Route>
-        </Switch>
+        <Container>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+                <Link to="/about">About</Link>
+              </li>
+            </ul>
+          </nav>
+          <Switch>
+            <Route exact path="/" component={HomePage}></Route>
+            <Route path="/about" component={About}></Route>
+          </Switch>
+        </Container>
+
       </div>
     </Router>
   );
