@@ -1,5 +1,5 @@
 import GuestList from '../components/Guest-list';
-import GuestInput from '../components/Guest-input';
+import GuestInputController from '../components/Guest-input-controller';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -24,7 +24,7 @@ export function About() {
                 <Grid item xs={12}>
                     <h1>Hello from about page!</h1>
                     <GuestList />
-                    <GuestInput />
+                    <GuestInputController />
                 </Grid>
             </Grid>
         </div>

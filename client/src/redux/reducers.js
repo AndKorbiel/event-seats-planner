@@ -1,4 +1,4 @@
-import { testAction } from './actions';
+import { TEST_ACTION_TYPE, ADD_NEW_GUEST, ADD_NEW_GUESTS_LIST } from './types/types';
 
 const initialState = {
     value: 'Test value',
@@ -6,22 +6,22 @@ const initialState = {
         [
             {
                 id: 1,
-                name: "Jan Kowalski",
+                guestName: "Jan Kowalski",
                 category: "Rodzina 1"
             },
             {
                 id: 2,
-                name: "Janina Kowalska",
+                guestName: "Janina Kowalska",
                 category: "Rodzina 2"
             },
             {
                 id: 3,
-                name: "Paweł Bądź",
+                guestName: "Paweł Bądź",
                 category: "Rodzina 3"
             },
             {
                 id: 4,
-                name: "Bogusław Gubała",
+                guestName: "Bogusław Gubała",
                 category: "Rodzina 1"
             },
         ]
@@ -29,10 +29,28 @@ const initialState = {
 
 export function mainReducer(state = initialState, action) {
     switch (action.type) {
-        case 'TEST_ACTION_TYPE':
+        case TEST_ACTION_TYPE:
             return {
                 ...state,
                 value: action.payload
+            }
+
+        case ADD_NEW_GUEST:
+            return {
+                ...state,
+                guestList: [
+                    ...state.guestList,
+                    action.payload
+                ]
+            }
+
+        case ADD_NEW_GUESTS_LIST:
+            return {
+                ...state,
+                guestList: [
+                    ...state.guestList,
+                    ...action.payload
+                ]
             }
 
         default:
