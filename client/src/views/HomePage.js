@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { testActionRequest } from '../redux/actions';
+import { getGuestsRequest } from '../redux/actions';
 
 function HomePage(props) {
     return (
@@ -19,7 +19,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        testFechData: () => { dispatch(testActionRequest()) }
+        testFechData: () => { dispatch(getGuestsRequest()) }
     }
 }
 

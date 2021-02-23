@@ -1,15 +1,15 @@
-import { TEST_ACTION_TYPE, TEST_ACTION_TYPE_REQUEST, ADD_NEW_GUEST, ADD_NEW_GUESTS_LIST } from './types/types';
+import { GET_GUESTS_REQUEST, ADD_NEW_GUEST_REQUEST, ADD_NEW_GUEST, ADD_NEW_GUESTS_LIST } from './types/types';
 
-export function testActionRequest() {
+export function getGuestsRequest() {
     return {
-        type: TEST_ACTION_TYPE_REQUEST
+        type: GET_GUESTS_REQUEST
     }
 }
 
-export function testAction(value) {
+export function ADD_NEW_GUEST_REQUEST(guest) {
     return {
-        type: TEST_ACTION_TYPE,
-        payload: value
+        type: ADD_NEW_GUEST,
+        payload: guest
     }
 }
 
