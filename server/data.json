@@ -1,18 +1,18 @@
 [
     {
-        "guestName": "Jan Kowalski",
+        "name": "Jan Kowalski",
         "category": "Rodzina 1"
     },
     {
-        "guestName": "Janina Kowalska",
+        "name": "Janina Kowalska",
         "category": "Rodzina 2"
     },
     {
-        "guestName": "Paweł Bądź",
+        "name": "Paweł Bądź",
         "category": "Rodzina 3"
     },
     {
-        "guestName": "Bogusław Gubała",
+        "name": "Bogusław Gubała",
         "category": "Rodzina 1"
     }
 ]

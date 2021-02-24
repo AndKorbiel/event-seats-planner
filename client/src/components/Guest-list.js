@@ -28,7 +28,7 @@ function GuestList(props) {
                                     <TableCell component="th" scope="row">
                                         {index + 1}
                                     </TableCell>
-                                    <TableCell align="right">{guest.guestName}</TableCell>
+                                    <TableCell align="right">{guest.name}</TableCell>
                                     <TableCell align="right">{guest.category}</TableCell>
                                 </TableRow>
                             )

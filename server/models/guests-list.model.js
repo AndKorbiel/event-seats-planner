@@ -6,8 +6,7 @@ const guestsSchema = new mongoose.Schema({
         required: true
     },
     category: {
-        type: String,
-        required: true
+        type: String
     }
 })
 

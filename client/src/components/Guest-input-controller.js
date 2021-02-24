@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { addNewGuest, addNewGuestsList } from '../redux/actions'
+import { addNewGuestRequest, addNewGuestsList } from '../redux/actions'
 import GuestInput from './Guest-input'
 import GuestInputMultiline from './Guest-input-mulitline'
 
@@ -73,7 +73,7 @@ class GuestInputController extends Component {
 
         if (!validateError) {
             const guest = {
-                guestName: this.state.guestName,
+                name: this.state.guestName,
                 category: this.state.category
             }
             this.props.addNewGuest(guest)
@@ -114,7 +114,7 @@ class GuestInputController extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addNewGuest: guest => { dispatch(addNewGuest(guest)) },
+        addNewGuest: guest => { dispatch(addNewGuestRequest(guest)) },
         addGuestsList: guestsList => { dispatch(addNewGuestsList(guestsList)) }
     }
 }

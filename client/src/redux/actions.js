@@ -6,10 +6,10 @@ export function getGuestsRequest() {
     }
 }
 
-export function ADD_NEW_GUEST_REQUEST(guest) {
+export function addNewGuestRequest(guest) {
     return {
-        type: ADD_NEW_GUEST,
-        payload: guest
+        type: ADD_NEW_GUEST_REQUEST,
+        guest
     }
 }
 

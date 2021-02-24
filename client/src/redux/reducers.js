@@ -11,7 +11,7 @@ export function mainReducer(state = initialState, action) {
                 ...state,
                 guestList: [
                     ...state.guestList,
-                    ...action.payload
+                    action.payload
                 ]
             }
 
