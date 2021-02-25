@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { removeDataFromStoreRequest } from '../redux/actions'
 
 // Material UI
 import Table from '@material-ui/core/Table';
@@ -8,6 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 function GuestList(props) {
     return (
@@ -19,10 +21,11 @@ function GuestList(props) {
                             <TableCell>id</TableCell>
                             <TableCell align="right">Name</TableCell>
                             <TableCell align="right">Category</TableCell>
+                            <TableCell align="right">Edit</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {props.guestList.map((guest, index) => {
+                        {props.guestsList.map((guest, index) => {
                             return (
                                 <TableRow key={index + 1}>
                                     <TableCell component="th" scope="row">
@@ -30,24 +33,32 @@ function GuestList(props) {
                                     </TableCell>
                                     <TableCell align="right">{guest.name}</TableCell>
                                     <TableCell align="right">{guest.category}</TableCell>
+                                    <TableCell align="right">
+                                        <Button variant="contained">Edit</Button>
+                                        <Button variant="contained" color="secondary" onClick={() => props.removeGuestFromList(guest._id)}>Remove</Button>
+                                    </TableCell>
                                 </TableRow>
                             )
                         })}
                     </TableBody>
                 </Table>
             </TableContainer>
-            <table>
-
-
-            </table>
         </div>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        guestList: state.guestList
+        guestsList: state.guestsList
     }
 }
 
-export default GuestList = connect(mapStateToProps, null)(GuestList)
+const mapDispatchToProps = dispatch => {
+    return {
+        removeGuestFromList: id => {
+            dispatch(removeDataFromStoreRequest(id))
+        }
+    }
+}
+
+export default GuestList = connect(mapStateToProps, mapDispatchToProps)(GuestList)

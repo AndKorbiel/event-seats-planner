@@ -1,11 +1,12 @@
 import { all } from 'redux-saga/effects';
-import { watchFetchGuesstList, watchPostNewGuest } from './testSaga';
+import { watchFetchGuesstList, watchPostNewGuest, watchRemoveGuest } from './guestsListSaga';
 
 export default function* MainSaga() {
     yield all(
         [
             watchFetchGuesstList(),
-            watchPostNewGuest()
+            watchPostNewGuest(),
+            watchRemoveGuest()
         ]
     )
 }

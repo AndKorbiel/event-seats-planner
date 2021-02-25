@@ -7,12 +7,11 @@ function* fetchGuestsList() {
             return data
         })
         .catch(err => console.log(err))
-    yield put({ type: 'ADD_NEW_GUEST', payload: response })
+    yield put({ type: 'UPDATE_WITH_DATA_FROM_DB', payload: response })
 }
 
 function* postNewGuest(payload) {
     const newGuest = payload.guest;
-    console.log(newGuest)
 
     const response = yield fetch('/guests-list/add',
         {
@@ -25,8 +24,20 @@ function* postNewGuest(payload) {
         })
         .then(response => response.json())
         .catch(err => console.log(err))
-    yield (console.log(response))
     yield put({ type: 'ADD_NEW_GUEST', payload: response })
+}
+
+function* removeGuest(payload) {
+    const id = payload.id;
+
+    const response = yield fetch('/guests-list/delete?' + new URLSearchParams({
+        id: id
+    }))
+        .then(res => res.json())
+        .catch(err => console.log(err));
+    yield console.log(response)
+
+    yield put({ type: 'REMOVE_DATA_FROM_STORE', payload: response })
 }
 
 export function* watchFetchGuesstList() {
@@ -35,4 +46,8 @@ export function* watchFetchGuesstList() {
 
 export function* watchPostNewGuest() {
     yield takeLatest('ADD_NEW_GUEST_REQUEST', postNewGuest)
+}
+
+export function* watchRemoveGuest() {
+    yield takeLatest('REMOVE_DATA_FROM_STORE_REQUEST', removeGuest)
 }

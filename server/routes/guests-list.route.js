@@ -5,5 +5,6 @@ const guestListController = require('../controllers/guests-list.controller');
 
 app.get('/getAll', guestListController.guestList_getAll);
 app.post('/add', guestListController.guestList_addGuest);
+app.post('/delete', guestListController.guestList_removeGuest);
 
 module.exports = app;

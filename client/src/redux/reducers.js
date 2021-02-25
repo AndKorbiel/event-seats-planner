@@ -1,16 +1,23 @@
-import { ADD_NEW_GUEST, ADD_NEW_GUESTS_LIST } from './types/types';
+import { ADD_NEW_GUEST, ADD_NEW_GUESTS_LIST, UPDATE_WITH_DATA_FROM_DB, REMOVE_DATA_FROM_STORE } from './types/types';
 
 const initialState = {
-    guestList: []
+    guestsList: []
 }
 
 export function mainReducer(state = initialState, action) {
     switch (action.type) {
+        case UPDATE_WITH_DATA_FROM_DB:
+            return {
+                ...state,
+                guestsList: [
+                    ...action.payload
+                ]
+            }
         case ADD_NEW_GUEST:
             return {
                 ...state,
-                guestList: [
-                    ...state.guestList,
+                guestsList: [
+                    ...state.guestsList,
                     action.payload
                 ]
             }
@@ -18,9 +25,17 @@ export function mainReducer(state = initialState, action) {
         case ADD_NEW_GUESTS_LIST:
             return {
                 ...state,
-                guestList: [
-                    ...state.guestList,
+                guestsList: [
+                    ...state.guestsList,
                     ...action.payload
+                ]
+            }
+
+        case REMOVE_DATA_FROM_STORE:
+            return {
+                ...state,
+                guestsList: [
+                    ...state.guestsList.filter(el => el._id != action.payload)
                 ]
             }
 

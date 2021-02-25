@@ -91,7 +91,6 @@ class GuestInputController extends Component {
                 })
             }
         })
-        console.log(guestListFormatted)
         this.props.addGuestsList(guestListFormatted)
     }
 
@@ -115,7 +114,7 @@ class GuestInputController extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         addNewGuest: guest => { dispatch(addNewGuestRequest(guest)) },
-        addGuestsList: guestsList => { dispatch(addNewGuestsList(guestsList)) }
+        addGuestsList: guestsList => { dispatch(addNewGuestsList(guestsList)) },
     }
 }
 

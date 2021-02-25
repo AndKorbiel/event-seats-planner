@@ -5,7 +5,6 @@ exports.guestList_getAll = (req, res) => {
         if (err) {
             res.send("Error while getting data from database")
         } else {
-            console.log(guestslist)
             res.send(guestslist)
         }
     })
@@ -23,4 +22,14 @@ exports.guestList_addGuest = (req, res) => {
             console.log(err);
             res.status(500).send(err)
         })
+}
+
+exports.guestList_removeGuest = (req, res) => {
+    const id = req.query.id;
+    console.log(id)
+    console.log('adsad')
+
+    GuestsList.findByIdAndDelete(id)
+        .then(() => res.json(id))
+        .catch(err => res.status(400).json('Error: ' + err))
 }
