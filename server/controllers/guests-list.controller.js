@@ -17,19 +17,27 @@ exports.guestList_addGuest = (req, res) => {
     })
 
     newGuest.save()
-        .then(() => res.status(200).send(newGuest))
-        .catch(err => {
-            console.log(err);
-            res.status(500).send(err)
+        .then(res.status(200).send(newGuest))
+        .catch(err => res.status(500).json('Error: ' + err))
+}
+
+exports.guestList_addGuestsList = (req, res) => {
+    const guestsList = req.body
+    console.log(req.body)
+
+    GuestsList.insertMany(guestsList)
+        .then(result => {
+            console.log(result)
+            res.status(200).send(result)
         })
+        .catch(err => res.status(500).json('Error: ' + err))
 }
 
 exports.guestList_removeGuest = (req, res) => {
-    const id = req.query.id;
-    console.log(id)
-    console.log('adsad')
-
+    const id = req.body.data;
     GuestsList.findByIdAndDelete(id)
-        .then(() => res.json(id))
-        .catch(err => res.status(400).json('Error: ' + err))
+        .then(() => {
+            res.status(200).send(id)
+        })
+        .catch(err => res.status(500).json('Error: ' + err))
 }

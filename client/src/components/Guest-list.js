@@ -1,6 +1,3 @@
-import { connect } from 'react-redux';
-import { removeDataFromStoreRequest } from '../redux/actions'
-
 // Material UI
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,8 +7,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
-function GuestList(props) {
+export default function GuestList(props) {
+    const guestNameInput = <TextField required className="outlined-basic" label="Guest name" name="Guest name" onChange={e => props.handleChange(e)} value={props.editedGuest.name} variant="outlined" />
+    const categoryInput = <TextField className="outlined-basic" label="Category" name="Category" onChange={e => props.handleChange(e)} value={props.editedGuest.category} variant="outlined" />
+
     return (
         <div>
             <TableContainer component={Paper}>
@@ -21,7 +22,7 @@ function GuestList(props) {
                             <TableCell>id</TableCell>
                             <TableCell align="right">Name</TableCell>
                             <TableCell align="right">Category</TableCell>
-                            <TableCell align="right">Edit</TableCell>
+                            <TableCell align="right"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -31,10 +32,14 @@ function GuestList(props) {
                                     <TableCell component="th" scope="row">
                                         {index + 1}
                                     </TableCell>
-                                    <TableCell align="right">{guest.name}</TableCell>
-                                    <TableCell align="right">{guest.category}</TableCell>
                                     <TableCell align="right">
-                                        <Button variant="contained">Edit</Button>
+                                        {props.isEditing === true && guest._id === props.editedGuest._id ? guestNameInput : guest.name}
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        {props.isEditing === true && guest._id === props.editedGuest._id ? categoryInput : guest.category}
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <Button variant="contained" onClick={() => props.handleEdit(guest)}>Edit</Button>
                                         <Button variant="contained" color="secondary" onClick={() => props.removeGuestFromList(guest._id)}>Remove</Button>
                                     </TableCell>
                                 </TableRow>
@@ -46,19 +51,3 @@ function GuestList(props) {
         </div>
     )
 }
-
-const mapStateToProps = state => {
-    return {
-        guestsList: state.guestsList
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        removeGuestFromList: id => {
-            dispatch(removeDataFromStoreRequest(id))
-        }
-    }
-}
-
-export default GuestList = connect(mapStateToProps, mapDispatchToProps)(GuestList)

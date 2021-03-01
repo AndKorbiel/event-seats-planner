@@ -1,4 +1,4 @@
-import { GET_GUESTS_REQUEST, ADD_NEW_GUEST_REQUEST, ADD_NEW_GUEST, ADD_NEW_GUESTS_LIST, UPDATE_WITH_DATA_FROM_DB, REMOVE_DATA_FROM_STORE_REQUEST, REMOVE_DATA_FROM_STORE } from './types/types';
+import { GET_GUESTS_REQUEST, ADD_NEW_GUEST_REQUEST, ADD_NEW_GUESTS_LIST_REQUEST, ADD_NEW_GUEST, ADD_NEW_GUESTS_LIST, UPDATE_WITH_DATA_FROM_DB, REMOVE_DATA_FROM_STORE_REQUEST, REMOVE_DATA_FROM_STORE } from './types/types';
 
 export function getGuestsRequest() {
     return {
@@ -27,6 +27,13 @@ export function addNewGuest(guest) {
     }
 }
 
+export function addNewGuestsListRequest(guestsList) {
+    return {
+        type: ADD_NEW_GUESTS_LIST_REQUEST,
+        guestsList
+    }
+}
+
 export function addNewGuestsList(guestsList) {
     return {
         type: ADD_NEW_GUESTS_LIST,
@@ -41,9 +48,9 @@ export function removeDataFromStoreRequest(id) {
     }
 }
 
-export function removeDataFromStore(guest) {
+export function removeDataFromStore(id) {
     return {
         type: REMOVE_DATA_FROM_STORE,
-        payload: guest
+        payload: id
     }
 }

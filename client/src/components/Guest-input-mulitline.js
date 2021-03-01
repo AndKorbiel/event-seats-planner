@@ -14,7 +14,7 @@ export default function GuestInputMultiline(props) {
                     variant="outlined"
                     name="Guests list"
                     value={props.guestsListArray}
-                    onKeyUp={e => props.handleChange(e)}
+                    onChange={e => props.handleChange(e)}
                 />
                 <Button variant="outlined" color="primary" size="large" onClick={() => props.triggerAddGuestList()}>
                     Add new guests

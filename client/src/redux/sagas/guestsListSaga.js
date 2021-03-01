@@ -1,43 +1,44 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, put, call } from 'redux-saga/effects';
+import { api } from '../services/api'
 
 function* fetchGuestsList() {
-    const response = yield fetch('/guests-list/getAll')
-        .then(res => res.json())
-        .then(data => {
-            return data
-        })
-        .catch(err => console.log(err))
-    yield put({ type: 'UPDATE_WITH_DATA_FROM_DB', payload: response })
+    try {
+        const response = yield call(api.fetchGuest)
+        yield put({ type: 'UPDATE_WITH_DATA_FROM_DB', payload: response })
+    } catch (err) {
+
+    }
 }
 
 function* postNewGuest(payload) {
     const newGuest = payload.guest;
+    try {
+        const response = yield call(api.postGuest, newGuest)
+        yield put({ type: 'ADD_NEW_GUEST', payload: response })
+    } catch (err) {
 
-    const response = yield fetch('/guests-list/add',
-        {
-            method: "POST",
-            body: JSON.stringify(newGuest),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .catch(err => console.log(err))
-    yield put({ type: 'ADD_NEW_GUEST', payload: response })
+    }
+}
+
+function* postNewGuestsList(payload) {
+    const newGuestsList = payload.guestsList
+    try {
+        const response = yield call(api.postGuestsList, newGuestsList);
+        yield put({ type: 'ADD_NEW_GUESTS_LIST', payload: response })
+    } catch (err) {
+
+    }
 }
 
 function* removeGuest(payload) {
     const id = payload.id;
 
-    const response = yield fetch('/guests-list/delete?' + new URLSearchParams({
-        id: id
-    }))
-        .then(res => res.json())
-        .catch(err => console.log(err));
-    yield console.log(response)
+    try {
+        const response = yield call(api.removeGuest, id);
+        yield put({ type: 'REMOVE_DATA_FROM_STORE', payload: response });
+    } catch (err) {
 
-    yield put({ type: 'REMOVE_DATA_FROM_STORE', payload: response })
+    }
 }
 
 export function* watchFetchGuesstList() {
@@ -46,6 +47,10 @@ export function* watchFetchGuesstList() {
 
 export function* watchPostNewGuest() {
     yield takeLatest('ADD_NEW_GUEST_REQUEST', postNewGuest)
+}
+
+export function* watchPostNewGeustsList() {
+    yield takeLatest('ADD_NEW_GUESTS_LIST_REQUEST', postNewGuestsList)
 }
 
 export function* watchRemoveGuest() {

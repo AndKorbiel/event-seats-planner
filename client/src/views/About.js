@@ -1,4 +1,4 @@
-import GuestList from '../components/Guest-list';
+import GuestListController from '../components/Guest-list-controller';
 import GuestInputController from '../components/Guest-input-controller';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,7 +23,7 @@ export function About() {
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <h1>Hello from about page!</h1>
-                    <GuestList />
+                    <GuestListController />
                     <GuestInputController />
                 </Grid>
             </Grid>

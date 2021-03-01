@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { addNewGuestRequest, addNewGuestsList } from '../redux/actions'
+import { addNewGuestRequest, addNewGuestsListRequest } from '../redux/actions'
 import GuestInput from './Guest-input'
 import GuestInputMultiline from './Guest-input-mulitline'
 
@@ -34,25 +34,18 @@ class GuestInputController extends Component {
         }, 10)
     }
 
+    handleChangeList = e => {
+        this.setState({
+            guestsListArray: e.target.value
+        })
+    }
+
     debounce = (callback, delay) => {
         let timeout;
         return function () {
             clearTimeout(timeout);
             timeout = setTimeout(callback, delay);
         }
-    }
-
-    handleChangeList = e => {
-        if (!this.debouncedFn) {
-            this.debouncedFn = this.debounce(() => {
-                const value = e.target.value.split(/\r?\n/);
-                this.setState({
-                    guestsListArray: value
-                })
-            }, 500);
-        }
-
-        this.debouncedFn();
     }
 
     vaildateInputs = () => {
@@ -76,22 +69,33 @@ class GuestInputController extends Component {
                 name: this.state.guestName,
                 category: this.state.category
             }
+
             this.props.addNewGuest(guest)
+            this.setState({
+                guestName: '',
+                category: '',
+                showGuestNameError: false,
+            })
         }
     }
 
     triggerAddGuestList = () => {
-        let guestListFormatted = [];
-        this.state.guestsListArray.forEach(guest => {
-            if (guest.length > 1) {
-                guestListFormatted.push({
-                    id: '',
-                    guestName: guest,
+        let newGuestsArray = [];
+        const guestListFormatted = this.state.guestsListArray.split(/\r?\n/)
+
+        guestListFormatted.forEach(guest => {
+            if (guest.length >= 1) {
+                newGuestsArray.push({
+                    name: guest,
                     category: ''
                 })
             }
         })
-        this.props.addGuestsList(guestListFormatted)
+
+        this.props.addGuestsList(newGuestsArray);
+        this.setState({
+            guestsListArray: []
+        })
     }
 
     render() {
@@ -105,7 +109,11 @@ class GuestInputController extends Component {
                     vaildateInputs={this.vaildateInputs}
                     triggerAddNewGuest={this.triggerAddNewGuest}
                 />
-                <GuestInputMultiline handleChange={this.handleChangeList} triggerAddGuestList={this.triggerAddGuestList} />
+                <GuestInputMultiline
+                    handleChange={this.handleChangeList}
+                    triggerAddGuestList={this.triggerAddGuestList}
+                    guestsListArray={this.state.guestsListArray}
+                />
             </div>
         )
     }
@@ -114,7 +122,7 @@ class GuestInputController extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         addNewGuest: guest => { dispatch(addNewGuestRequest(guest)) },
-        addGuestsList: guestsList => { dispatch(addNewGuestsList(guestsList)) },
+        addGuestsList: guestsList => { dispatch(addNewGuestsListRequest(guestsList)) },
     }
 }
 
