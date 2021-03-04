@@ -24,4 +24,10 @@ const removeGuest = id => {
         .catch(err => console.log(err))
 }
 
-export const api = { fetchGuest, postGuest, removeGuest, postGuestsList }
+const editGuest = guest => {
+    return axios.post('/guests-list/edit', {data: guest})
+        .then(response => response.data)
+        .catch(err => console.log(err))
+}
+
+export const api = { fetchGuest, postGuest, removeGuest, postGuestsList, editGuest }

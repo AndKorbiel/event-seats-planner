@@ -41,3 +41,20 @@ exports.guestList_removeGuest = (req, res) => {
         })
         .catch(err => res.status(500).json('Error: ' + err))
 }
+
+exports.guestList_editGuest = (req, res) => {
+    const id = req.body.data.id;
+
+    const updatedGuest = {
+        name: req.body.data.name,
+        category: req.body.data.category
+    }
+
+    GuestsList.findOneAndUpdate({_id: id}, updatedGuest, {new: true}, (err, result) =>{
+        if (err) {
+            res.status(500).json('Error: ' + err)
+        } else {
+            res.status(200).send(result)
+        }
+    })
+}

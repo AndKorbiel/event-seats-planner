@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { removeDataFromStoreRequest } from '../redux/actions'
+import { removeDataFromStoreRequest, editDataInStoreRequest } from '../redux/actions'
 import GuestList from './Guest-list';
 
 class GuestListController extends Component {
@@ -15,29 +15,23 @@ class GuestListController extends Component {
     }
 
     handleEdit = (guest) => {
-        console.log(guest)
-        this.setState({
+        this.setState(prevState => ({
             editedGuest: guest,
-            isEditing: true
-        })
+            isEditing: !prevState.isEditing
+        }))
     }
 
     handleChange = (e) => {
         const targetName = e.target.name;
         const value = e.target.value;
 
-        console.log(this.state.editedGuest)
-
         let { name, category, _id } = this.state.editedGuest;
-        console.log(name, category)
-
 
         if (targetName === 'Guest name') {
             name = value;
         } else {
             category = value;
         }
-        console.log(name, category)
 
         this.setState({
             editedGuest: {
@@ -46,6 +40,19 @@ class GuestListController extends Component {
                 _id,
                 showGuestNameError: false,
             },
+        })
+    }
+
+    handleSave = () => {
+        const editedGuest = {
+            id: this.state.editedGuest._id,
+            name: this.state.editedGuest.name,
+            category: this.state.editedGuest.category
+        }
+
+        this.props.editGuest(editedGuest);
+        this.setState({
+            isEditing: false
         })
     }
 
@@ -58,6 +65,7 @@ class GuestListController extends Component {
                     editedGuest={this.state.editedGuest}
                     handleEdit={this.handleEdit}
                     handleChange={this.handleChange}
+                    handleSave={this.handleSave}
                 />
             </div>
         )
@@ -74,6 +82,9 @@ const mapDispatchToProps = dispatch => {
     return {
         removeGuestFromList: id => {
             dispatch(removeDataFromStoreRequest(id))
+        },
+        editGuest: guest => {
+            dispatch(editDataInStoreRequest(guest))
         }
     }
 }

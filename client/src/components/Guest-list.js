@@ -39,8 +39,18 @@ export default function GuestList(props) {
                                         {props.isEditing === true && guest._id === props.editedGuest._id ? categoryInput : guest.category}
                                     </TableCell>
                                     <TableCell align="right">
-                                        <Button variant="contained" onClick={() => props.handleEdit(guest)}>Edit</Button>
-                                        <Button variant="contained" color="secondary" onClick={() => props.removeGuestFromList(guest._id)}>Remove</Button>
+                                        {(props.isEditing === true && guest._id === props.editedGuest._id) &&
+                                            <div>
+                                                <Button variant="contained" onClick={() => props.handleEdit(guest)}>Cancel</Button>
+                                                <Button variant="contained" color="secondary" onClick={() => props.handleSave()}>Save</Button>
+                                            </div>
+                                        }
+                                        {props.isEditing === false &&
+                                            <div>
+                                                <Button variant="contained" onClick={() => props.handleEdit(guest)}>Edit</Button>
+                                                <Button variant="contained" color="secondary" onClick={() => props.removeGuestFromList(guest._id)}>Remove</Button>
+                                            </div>
+                                        }
                                     </TableCell>
                                 </TableRow>
                             )

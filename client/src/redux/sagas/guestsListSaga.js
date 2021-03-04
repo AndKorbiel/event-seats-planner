@@ -41,6 +41,15 @@ function* removeGuest(payload) {
     }
 }
 
+function* editGuest(payload) {
+    try {
+        const response = yield call(api.editGuest, payload.data);
+        yield put({type: 'EDIT_DATA_IN_STORE', payload: response})
+    } catch (err) {
+
+    }
+}
+
 export function* watchFetchGuesstList() {
     yield takeLatest('GET_GUESTS_REQUEST', fetchGuestsList)
 }
@@ -55,4 +64,8 @@ export function* watchPostNewGeustsList() {
 
 export function* watchRemoveGuest() {
     yield takeLatest('REMOVE_DATA_FROM_STORE_REQUEST', removeGuest)
+}
+
+export function* watchEditGuest() {
+    yield takeLatest('EDIT_DATA_IN_STORE_REQUEST', editGuest)
 }
