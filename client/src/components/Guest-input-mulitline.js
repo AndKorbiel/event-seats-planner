@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 export default function GuestInputMultiline(props) {
     return (
         <div className="user-input-group">
-            <h2>Please enter guests names - one per each line</h2>
             <form autoComplete="off">
                 <TextField
                     id="outlined-multiline-static"

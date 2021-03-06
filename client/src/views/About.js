@@ -1,5 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import { PageHeader } from '../components/PageHeader'
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,11 +19,13 @@ export default function About() {
 
     return (
         <div className={classes.root}>
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <h1>Hello from about page!</h1>
+            <PageHeader title="Hello from about page!"></PageHeader>
+            <Container>
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </Container>
         </div>
     )
 }

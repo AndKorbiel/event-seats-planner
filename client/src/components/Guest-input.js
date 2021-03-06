@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 export default function GuestInput(props) {
     return (
         <div className="user-input-group">
-            <h2>Add new user</h2>
             <form autoComplete="off">
                 <TextField
                     required

@@ -1,8 +1,7 @@
 .App {
   text-align: center;
-  background: #353535;
+  background: #edf6f9;
   color: #fff;
-  height: 100vh;
 }
 
 a {
@@ -17,4 +16,8 @@ h2 {
 .user-input-group {
   background: #fff;
   padding: 15px;
+}
+
+.MuiAppBar-colorPrimary {
+  background-color: #f08080;
 }

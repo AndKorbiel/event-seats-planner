@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { addNewGuestRequest, addNewGuestsListRequest } from '../redux/actions'
 import GuestInput from './Guest-input'
 import GuestInputMultiline from './Guest-input-mulitline'
+import CustomModal from './CustomModal'
 
 class GuestInputController extends Component {
     state = {
@@ -101,18 +102,34 @@ class GuestInputController extends Component {
     render() {
         return (
             <div>
-                <GuestInput
-                    guestName={this.state.guestName}
-                    category={this.state.category}
-                    showGuestNameError={this.state.showGuestNameError}
-                    handleChange={this.handleChange}
-                    vaildateInputs={this.vaildateInputs}
-                    triggerAddNewGuest={this.triggerAddNewGuest}
+                <CustomModal
+                    buttonText="Add new guest"
+                    title="Add new guest"
+                    desc="Lorem ipsum description"
+                    align="left"
+                    form={
+                        <GuestInput
+                            guestName={this.state.guestName}
+                            category={this.state.category}
+                            showGuestNameError={this.state.showGuestNameError}
+                            handleChange={this.handleChange}
+                            vaildateInputs={this.vaildateInputs}
+                            triggerAddNewGuest={this.triggerAddNewGuest}
+                        />
+                    }
                 />
-                <GuestInputMultiline
-                    handleChange={this.handleChangeList}
-                    triggerAddGuestList={this.triggerAddGuestList}
-                    guestsListArray={this.state.guestsListArray}
+                <CustomModal
+                    buttonText="Add multiple guests"
+                    title="Add multiple guests"
+                    desc="Lorem ipsum description"
+                    align="right"
+                    form={
+                        <GuestInputMultiline
+                            handleChange={this.handleChangeList}
+                            triggerAddGuestList={this.triggerAddGuestList}
+                            guestsListArray={this.state.guestsListArray}
+                        />
+                    }
                 />
             </div>
         )
