@@ -25,7 +25,7 @@ export default function CustomModal(props) {
 
     return (
         <div>
-            <Button variant="outlined" color="primary" size="large" className={classes.align} onClick={() => handleOpen()}>{props.buttonText}</Button>
+            <Button variant="contained" color="primary" size="large" className={classes.align} onClick={() => handleOpen()}>{props.buttonText}</Button>
             <Dialog
                 open={open}
                 onClose={handleOpen}

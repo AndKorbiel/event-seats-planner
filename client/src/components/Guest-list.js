@@ -8,21 +8,30 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+    tableContainer: {
+        padding: '15px',
+    }
+}))
 
 export default function GuestList(props) {
     const guestNameInput = <TextField required className="outlined-basic" label="Guest name" name="Guest name" onChange={e => props.handleChange(e)} value={props.editedGuest.name} variant="outlined" />
     const categoryInput = <TextField className="outlined-basic" label="Category" name="Category" onChange={e => props.handleChange(e)} value={props.editedGuest.category} variant="outlined" />
+    const classes = useStyles();
 
     return (
         <div>
             <TableContainer component={Paper}>
-                <Table aria-label="simple table">
+                <h2>Guest count: {props.guestsList.length}</h2>
+                <Table aria-label="simple table" className={classes.tableContainer}>
                     <TableHead>
                         <TableRow>
-                            <TableCell>id</TableCell>
+                            <TableCell>#</TableCell>
                             <TableCell align="right">Name</TableCell>
                             <TableCell align="right">Category</TableCell>
-                            <TableCell align="right"></TableCell>
+                            <TableCell align="right">Edit</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

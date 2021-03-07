@@ -6,7 +6,7 @@ import { PageHeader } from '../components/PageHeader'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,13 +22,16 @@ const useStyles = makeStyles((theme) => ({
 function GuestsListPage(props) {
     const classes = useStyles();
 
+    useEffect(() => {
+        props.fetchData()
+    }, [])
+
     return (
         <div className={classes.root}>
             <PageHeader title="Guests list" />
             <Container>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
-                        <button onClick={props.fetchData}>Click to fetch</button>
                         <GuestInputController />
                         <GuestListController />
                         <GuestInputController />
