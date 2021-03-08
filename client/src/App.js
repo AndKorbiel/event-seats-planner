@@ -21,7 +21,7 @@ import './styles/App.css';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: themeColors.dark
+      main: themeColors.primary
     }
   }
 })

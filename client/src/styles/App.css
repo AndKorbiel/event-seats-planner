@@ -21,3 +21,47 @@ h2 {
 .MuiAppBar-colorPrimary {
   background-color: #f08080;
 }
+
+.customModal .MuiDialog-paper {
+  max-width: 900px;
+  text-align: center;
+  padding: 10px;
+}
+
+.customModal .MuiFormControl-root {
+  margin: 0 5px;
+}
+
+.customModal .MuiButton-containedSizeLarge {
+  min-height: 56px;
+  margin-left: 5px;
+}
+
+.customModal .multiline .MuiTextField-root {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.MuiTable-root {
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  border: 1px solid #e0e0e0;
+}
+
+.MuiTable-root .MuiOutlinedInput-input {
+  padding: 12px 14px;
+}
+
+.MuiTable-root .MuiInputLabel-outlined {
+  transform: translate(14px, 14px) scale(1);
+}
+
+.MuiTable-root .MuiTableCell-root {
+  padding: 10px 16px;
+}
+
+.MuiTableHead-root {
+  background: #f9f9f9;
+}

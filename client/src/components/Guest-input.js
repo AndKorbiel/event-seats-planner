@@ -24,7 +24,7 @@ export default function GuestInput(props) {
                     value={props.category}
                     onChange={e => props.handleChange(e)}
                 />
-                <Button variant="outlined" color="primary" size="large" onClick={() => props.triggerAddNewGuest()}>
+                <Button variant="contained" color="primary" size="large" onClick={() => props.triggerAddNewGuest()}>
                     Add new guest
                 </Button>
             </form>

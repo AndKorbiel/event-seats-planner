@@ -29,6 +29,7 @@ export default function CustomModal(props) {
             <Dialog
                 open={open}
                 onClose={handleOpen}
+                className="customModal"
             >
                 <DialogTitle id="form-dialog-title">{props.title}</DialogTitle>
                 <DialogContent>
@@ -36,7 +37,7 @@ export default function CustomModal(props) {
                     {props.form}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleOpen} color="primary">Close</Button>
+                    <Button onClick={handleOpen} color="secondary" variant="outlined">Close</Button>
                 </DialogActions>
             </Dialog>
         </div>

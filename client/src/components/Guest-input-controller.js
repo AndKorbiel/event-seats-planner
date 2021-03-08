@@ -10,6 +10,7 @@ class GuestInputController extends Component {
         guestName: '',
         category: '',
         showGuestNameError: false,
+        showGuestListError: false,
         guestsListArray: []
     }
 
@@ -49,21 +50,21 @@ class GuestInputController extends Component {
         }
     }
 
-    vaildateInputs = () => {
+    vaildateInputs = (stateValue, errorType) => {
         let value = true
-        if (this.state.guestName) {
+        if (stateValue) {
             value = false
         }
 
         this.setState({
-            showGuestNameError: value
+            [errorType]: value
         })
 
         return value
     }
 
     triggerAddNewGuest = () => {
-        const validateError = this.vaildateInputs();
+        const validateError = this.vaildateInputs(this.state.guestName, 'showGuestNameError');
 
         if (!validateError) {
             const guest = {
@@ -81,22 +82,27 @@ class GuestInputController extends Component {
     }
 
     triggerAddGuestList = () => {
-        let newGuestsArray = [];
-        const guestListFormatted = this.state.guestsListArray.split(/\r?\n/)
+        const validateError = this.vaildateInputs(this.state.guestsListArray.length > 1, 'showGuestListError')
 
-        guestListFormatted.forEach(guest => {
-            if (guest.length >= 1) {
-                newGuestsArray.push({
-                    name: guest,
-                    category: ''
-                })
-            }
-        })
+        if (!validateError) {
+            let newGuestsArray = [];
+            const guestListFormatted = this.state.guestsListArray.split(/\r?\n/)
 
-        this.props.addGuestsList(newGuestsArray);
-        this.setState({
-            guestsListArray: []
-        })
+            guestListFormatted.forEach(guest => {
+                if (guest.length >= 1) {
+                    newGuestsArray.push({
+                        name: guest,
+                        category: ''
+                    })
+                }
+            })
+
+            this.props.addGuestsList(newGuestsArray);
+            this.setState({
+                guestsListArray: [],
+                showGuestListError: false,
+            })
+        }
     }
 
     render() {
@@ -126,6 +132,7 @@ class GuestInputController extends Component {
                     form={
                         <GuestInputMultiline
                             handleChange={this.handleChangeList}
+                            showGuestNameError={this.state.showGuestListError}
                             triggerAddGuestList={this.triggerAddGuestList}
                             guestsListArray={this.state.guestsListArray}
                         />
