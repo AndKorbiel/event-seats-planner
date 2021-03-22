@@ -3,29 +3,31 @@ import Button from '@material-ui/core/Button';
 
 export default function GuestInput(props) {
     return (
-        <div className="user-input-group">
+        <div className="user-input-group custom-input-wrapper">
             <form autoComplete="off">
                 <TextField
-                    required
+                    required={props.required}
                     error={props.showGuestNameError}
                     className="outlined-basic"
-                    label="Guest name"
-                    name="Guest name"
+                    label={props.label}
+                    name={props.name}
                     value={props.guestName}
                     onChange={e => props.handleChange(e)}
                     helperText={props.showGuestNameError ? 'This field is required' : ''}
                     variant="outlined"
                 />
-                <TextField
-                    className="outlined-basic"
-                    label="Category"
-                    name="Category"
-                    variant="outlined"
-                    value={props.category}
-                    onChange={e => props.handleChange(e)}
-                />
+                {props.displayCategory && (
+                    <TextField
+                        className="outlined-basic"
+                        labelcategory={props.labelCat}
+                        namecategory={props.nameCat}
+                        variant="outlined"
+                        value={props.category}
+                        onChange={e => props.handleChange(e)}
+                    />
+                )}
                 <Button variant="contained" color="primary" size="large" onClick={() => props.triggerAddNewGuest()}>
-                    Add new guest
+                    {props.buttonText}
                 </Button>
             </form>
         </div>

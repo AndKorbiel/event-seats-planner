@@ -33,7 +33,6 @@ h2 {
 }
 
 .customModal .MuiButton-containedSizeLarge {
-  min-height: 56px;
   margin-left: 5px;
 }
 
@@ -50,18 +49,37 @@ h2 {
   border: 1px solid #e0e0e0;
 }
 
-.MuiTable-root .MuiOutlinedInput-input {
+.MuiTable-root .MuiOutlinedInput-input,
+.custom-input-wrapper input {
   padding: 12px 14px;
 }
 
-.MuiTable-root .MuiInputLabel-outlined {
+.custom-input-wrapper .MuiButton-containedSizeLarge {
+  margin-left: 10px;
+}
+
+.MuiTable-root .MuiInputLabel-outlined,
+.custom-input-wrapper .MuiInputLabel-outlined {
   transform: translate(14px, 14px) scale(1);
 }
 
 .MuiTable-root .MuiTableCell-root {
   padding: 10px 16px;
+  height: 48px;
 }
 
 .MuiTableHead-root {
   background: #f9f9f9;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex > div {
+  flex-grow: 1;
+}
+
+.custom-input-wrapper {
+  background: none;
 }

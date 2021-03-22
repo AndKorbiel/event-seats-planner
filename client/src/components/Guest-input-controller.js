@@ -107,7 +107,7 @@ class GuestInputController extends Component {
 
     render() {
         return (
-            <div>
+            <div className="flex">
                 <CustomModal
                     buttonText="Add new guest"
                     title="Add new guest"
@@ -118,11 +118,30 @@ class GuestInputController extends Component {
                             guestName={this.state.guestName}
                             category={this.state.category}
                             showGuestNameError={this.state.showGuestNameError}
+                            label="Guest name"
+                            name="Guest name"
                             handleChange={this.handleChange}
                             vaildateInputs={this.vaildateInputs}
                             triggerAddNewGuest={this.triggerAddNewGuest}
+                            displayCategory={true}
+                            buttonText="Add new guest"
+                            required={true}
                         />
                     }
+                />
+                <GuestInput
+                    guestName={this.state.guestName}
+                    category={this.state.category}
+                    showGuestNameError={this.state.showGuestNameError}
+                    label="Search"
+                    name="Search"
+                    handleChange={this.handleChange}
+                    vaildateInputs={this.vaildateInputs}
+                    triggerAddNewGuest={this.triggerAddNewGuest}
+                    displayCategory={false}
+                    buttonText="Search for a guest"
+                    required={false}
+                    align="center"
                 />
                 <CustomModal
                     buttonText="Add multiple guests"
@@ -133,8 +152,12 @@ class GuestInputController extends Component {
                         <GuestInputMultiline
                             handleChange={this.handleChangeList}
                             showGuestNameError={this.state.showGuestListError}
+                            labelcategory="Category"
+                            namecategory="Category"
                             triggerAddGuestList={this.triggerAddGuestList}
                             guestsListArray={this.state.guestsListArray}
+                            displayCategory={true}
+                            buttonText="Add new guest"
                         />
                     }
                 />
