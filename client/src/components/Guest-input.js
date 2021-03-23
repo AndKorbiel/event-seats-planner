@@ -7,26 +7,26 @@ export default function GuestInput(props) {
             <form autoComplete="off">
                 <TextField
                     required={props.required}
-                    error={props.showGuestNameError}
+                    error={props.showError}
                     className="outlined-basic"
                     label={props.label}
                     name={props.name}
-                    value={props.guestName}
+                    value={props.value}
                     onChange={e => props.handleChange(e)}
-                    helperText={props.showGuestNameError ? 'This field is required' : ''}
+                    helperText={props.showError ? 'This field is required' : ''}
                     variant="outlined"
                 />
                 {props.displayCategory && (
                     <TextField
                         className="outlined-basic"
-                        labelcategory={props.labelCat}
-                        namecategory={props.nameCat}
+                        label={props.labelcategory}
+                        name={props.namecategory}
                         variant="outlined"
                         value={props.category}
                         onChange={e => props.handleChange(e)}
                     />
                 )}
-                <Button variant="contained" color="primary" size="large" onClick={() => props.triggerAddNewGuest()}>
+                <Button variant="contained" color="primary" size="large" onClick={() => props.triggerSubmit()}>
                     {props.buttonText}
                 </Button>
             </form>

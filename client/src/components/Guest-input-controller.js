@@ -11,24 +11,35 @@ class GuestInputController extends Component {
         category: '',
         showGuestNameError: false,
         showGuestListError: false,
-        guestsListArray: []
+        showSearchError: false,
+        guestsListArray: [],
+        searchValue: ''
     }
 
     handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
 
-        let { guestName, category } = this.state;
+        let { guestName, category, searchValue } = this.state;
 
-        if (name === 'Guest name') {
-            guestName = value;
-        } else {
-            category = value;
+        switch (name) {
+            case 'Guest name':
+                guestName = value;
+                break;
+            case 'Category':
+                category = value;
+                break;
+            case 'Search':
+                searchValue = value;
+                break;
+            default:
+                break;
         }
 
         this.setState({
             guestName,
-            category
+            category,
+            searchValue
         })
 
         setTimeout(() => {
@@ -105,6 +116,10 @@ class GuestInputController extends Component {
         }
     }
 
+    triggerSearch = () => {
+        const validateError = this.vaildateInputs(this.state.searchValue, 'showSearchError');
+    }
+
     render() {
         return (
             <div className="flex">
@@ -115,14 +130,16 @@ class GuestInputController extends Component {
                     align="left"
                     form={
                         <GuestInput
-                            guestName={this.state.guestName}
+                            value={this.state.guestName}
                             category={this.state.category}
-                            showGuestNameError={this.state.showGuestNameError}
+                            showError={this.state.showGuestNameError}
                             label="Guest name"
                             name="Guest name"
+                            labelcategory="Category"
+                            namecategory="Category"
                             handleChange={this.handleChange}
                             vaildateInputs={this.vaildateInputs}
-                            triggerAddNewGuest={this.triggerAddNewGuest}
+                            triggerSubmit={this.triggerAddNewGuest}
                             displayCategory={true}
                             buttonText="Add new guest"
                             required={true}
@@ -130,16 +147,15 @@ class GuestInputController extends Component {
                     }
                 />
                 <GuestInput
-                    guestName={this.state.guestName}
-                    category={this.state.category}
-                    showGuestNameError={this.state.showGuestNameError}
-                    label="Search"
+                    value={this.state.searchValue}
+                    showError={this.state.showSearchError}
+                    label="Enter guest name..."
                     name="Search"
                     handleChange={this.handleChange}
                     vaildateInputs={this.vaildateInputs}
-                    triggerAddNewGuest={this.triggerAddNewGuest}
+                    triggerSubmit={this.triggerSearch}
                     displayCategory={false}
-                    buttonText="Search for a guest"
+                    buttonText="Search"
                     required={false}
                     align="center"
                 />
@@ -152,8 +168,6 @@ class GuestInputController extends Component {
                         <GuestInputMultiline
                             handleChange={this.handleChangeList}
                             showGuestNameError={this.state.showGuestListError}
-                            labelcategory="Category"
-                            namecategory="Category"
                             triggerAddGuestList={this.triggerAddGuestList}
                             guestsListArray={this.state.guestsListArray}
                             displayCategory={true}
