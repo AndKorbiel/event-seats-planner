@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { addNewGuestRequest, addNewGuestsListRequest } from '../redux/actions'
+import { addNewGuestRequest, addNewGuestsListRequest, searchGuestsRequest } from '../redux/actions'
 import GuestInput from './Guest-input'
 import GuestInputMultiline from './Guest-input-mulitline'
 import CustomModal from './CustomModal'
@@ -117,7 +117,8 @@ class GuestInputController extends Component {
     }
 
     triggerSearch = () => {
-        const validateError = this.vaildateInputs(this.state.searchValue, 'showSearchError');
+        // const validateError = this.vaildateInputs(this.state.searchValue, 'showSearchError');
+        this.props.searchGuests(this.state.searchValue)
     }
 
     render() {
@@ -184,6 +185,7 @@ const mapDispatchToProps = dispatch => {
     return {
         addNewGuest: guest => { dispatch(addNewGuestRequest(guest)) },
         addGuestsList: guestsList => { dispatch(addNewGuestsListRequest(guestsList)) },
+        searchGuests: guest => { dispatch(searchGuestsRequest(guest)) },
     }
 }
 

@@ -30,4 +30,10 @@ const editGuest = guest => {
         .catch(err => console.log(err))
 }
 
-export const api = { fetchGuest, postGuest, removeGuest, postGuestsList, editGuest }
+const searchGuests = guest => {
+    return axios.get('/guests-list/find', {params: { guest }})
+        .then(response => response.data)
+        .catch(err => console.log(err))
+}
+
+export const api = { fetchGuest, postGuest, removeGuest, postGuestsList, editGuest, searchGuests }

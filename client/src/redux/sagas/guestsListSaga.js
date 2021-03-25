@@ -50,6 +50,15 @@ function* editGuest(payload) {
     }
 }
 
+function* searchGuests(payload) {
+    try {
+        const response = yield call(api.searchGuests, payload.guest);
+        yield put({type: 'UPDATE_WITH_DATA_FROM_DB', payload: response})
+    } catch (err) {
+
+    }
+}
+
 export function* watchFetchGuesstList() {
     yield takeLatest('GET_GUESTS_REQUEST', fetchGuestsList)
 }
@@ -68,4 +77,8 @@ export function* watchRemoveGuest() {
 
 export function* watchEditGuest() {
     yield takeLatest('EDIT_DATA_IN_STORE_REQUEST', editGuest)
+}
+
+export function* watchSearchGuests() {
+    yield takeLatest('SEARCH_GUESTS_REQUEST', searchGuests)
 }

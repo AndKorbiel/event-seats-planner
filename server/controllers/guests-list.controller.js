@@ -10,6 +10,16 @@ exports.guestList_getAll = (req, res) => {
     })
 }
 
+exports.guestList_findGuest = (req, res) => {
+    GuestsList.find({name: req.query.guest}, (err, guestsList) => {
+        if (err) {
+            res.send("Error while getting data from database")
+        } else {
+            res.send(guestsList)
+        }
+    })
+}
+
 exports.guestList_addGuest = (req, res) => {
     const newGuest = new GuestsList({
         name: req.body.name,
