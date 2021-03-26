@@ -4,6 +4,7 @@ import { addNewGuestRequest, addNewGuestsListRequest, searchGuestsRequest } from
 import GuestInput from './Guest-input'
 import GuestInputMultiline from './Guest-input-mulitline'
 import CustomModal from './CustomModal'
+import CategoryDropdown from './Guest-category-dropdown';
 
 class GuestInputController extends Component {
     state = {
@@ -13,14 +14,15 @@ class GuestInputController extends Component {
         showGuestListError: false,
         showSearchError: false,
         guestsListArray: [],
-        searchValue: ''
+        searchValue: '',
+        selectedCategory: ''
     }
 
     handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
 
-        let { guestName, category, searchValue } = this.state;
+        let { guestName, category, searchValue, selectedCategory } = this.state;
 
         switch (name) {
             case 'Guest name':
@@ -32,6 +34,9 @@ class GuestInputController extends Component {
             case 'Search':
                 searchValue = value;
                 break;
+            case 'SelectCategory':
+                selectedCategory = value;
+                break;
             default:
                 break;
         }
@@ -39,7 +44,8 @@ class GuestInputController extends Component {
         this.setState({
             guestName,
             category,
-            searchValue
+            searchValue,
+            selectedCategory
         })
 
         setTimeout(() => {
@@ -121,6 +127,18 @@ class GuestInputController extends Component {
         this.props.searchGuests(this.state.searchValue)
     }
 
+    categoryList = () => {
+        const categoryList = [];
+
+        this.props.guestsList.map(el => {
+            if (categoryList.indexOf(el.category) < 0 && el.category !== '') {
+                categoryList.push(el.category)
+            }
+        })
+
+        return categoryList
+    }
+
     render() {
         return (
             <div className="flex">
@@ -160,6 +178,11 @@ class GuestInputController extends Component {
                     required={false}
                     align="center"
                 />
+                <CategoryDropdown
+                    list={this.categoryList()}
+                    value={this.state.selectedCategory}
+                    handleChange={this.handleChange}
+                />
                 <CustomModal
                     buttonText="Add multiple guests"
                     title="Add multiple guests"
@@ -181,6 +204,12 @@ class GuestInputController extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        guestsList: state.guestsList
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         addNewGuest: guest => { dispatch(addNewGuestRequest(guest)) },
@@ -189,4 +218,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default GuestInputController = connect(null, mapDispatchToProps)(GuestInputController);
+export default GuestInputController = connect(mapStateToProps, mapDispatchToProps)(GuestInputController);

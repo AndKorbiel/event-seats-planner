@@ -56,6 +56,10 @@ class GuestListController extends Component {
         })
     }
 
+    handleRemove = guestId => {
+        this.props.removeGuestFromList(guestId)
+    }
+
     render() {
         return (
             <div>
@@ -66,6 +70,7 @@ class GuestListController extends Component {
                     handleEdit={this.handleEdit}
                     handleChange={this.handleChange}
                     handleSave={this.handleSave}
+                    removeGuestFromList={this.handleRemove}
                 />
             </div>
         )

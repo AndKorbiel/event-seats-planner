@@ -82,4 +82,20 @@ h2 {
 
 .custom-input-wrapper {
   background: none;
+  margin-top: 5px;
 }
+
+#custom-select {
+  flex-direction: initial;
+  align-items: center;
+}
+
+#custom-select  .MuiOutlinedInput-root {
+  height: 48px;
+  width: 100%;
+  margin-right: 10px;
+}
+
+/*#custom-select .MuiInputLabel-outlined {*/
+/*  transform: translate(14px, 33px) scale(1);*/
+/*}*/
