@@ -12,12 +12,17 @@ exports.guestList_getAll = (req, res) => {
 
 exports.guestList_findGuest = (req, res) => {
     let filter = null;
-    if (req.query.guest) {
+    console.log(req.query)
+
+    if (req.query.guestName) {
         filter = {
-            name: req.query.guest
+            name: req.query.guestName
+        }
+    } else if (req.query.category) {
+        filter = {
+            category: req.query.category
         }
     }
-    console.log(req.query)
     GuestsList.find(filter, (err, guestsList) => {
         if (err) {
             res.send("Error while getting data from database")

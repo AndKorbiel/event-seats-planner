@@ -31,7 +31,7 @@ const editGuest = guest => {
 }
 
 const searchGuests = guest => {
-    return axios.get('/guests-list/find', {params: { guest }})
+    return axios.get('/guests-list/find', {params: guest })
         .then(response => response.data)
         .catch(err => console.log(err))
 }

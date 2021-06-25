@@ -15,7 +15,9 @@ class GuestInputController extends Component {
         showSearchError: false,
         guestsListArray: [],
         searchValue: '',
-        selectedCategory: ''
+        selectedCategory: '',
+        initialized: false,
+        list: []
     }
 
     handleChange = (e) => {
@@ -124,7 +126,10 @@ class GuestInputController extends Component {
 
     triggerSearch = () => {
         // const validateError = this.vaildateInputs(this.state.searchValue, 'showSearchError');
-        this.props.searchGuests(this.state.searchValue)
+        this.props.searchGuests({
+            guestName: this.state.searchValue,
+            category: this.state.selectedCategory
+        })
     }
 
     categoryList = () => {
@@ -135,6 +140,14 @@ class GuestInputController extends Component {
                 categoryList.push(el.category)
             }
         })
+        console.log(this.state)
+        if (!this.state.initialized) {
+            console.log('jest')
+            this.setState({
+                list: categoryList,
+                initialized: true
+            })
+        }
 
         return categoryList
     }
@@ -179,9 +192,10 @@ class GuestInputController extends Component {
                     align="center"
                 />
                 <CategoryDropdown
-                    list={this.categoryList()}
+                    list={!this.state.initialized ? this.categoryList() : this.state.list}
                     value={this.state.selectedCategory}
                     handleChange={this.handleChange}
+                    triggerSubmit={this.triggerSearch}
                 />
                 <CustomModal
                     buttonText="Add multiple guests"
@@ -206,7 +220,17 @@ class GuestInputController extends Component {
 
 const mapStateToProps = state => {
     return {
-        guestsList: state.guestsList
+        guestsList: state.guestsList,
+        categoryList: () => {
+            const categoryList = [];
+            state.guestsList.map(el => {
+                if (categoryList.indexOf(el.category) < 0 && el.category !== '') {
+                    categoryList.push(el.category)
+                }
+            })
+
+            return categoryList
+        }
     }
 }
 
